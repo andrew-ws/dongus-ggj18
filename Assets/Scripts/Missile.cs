@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    public bool Launched { get; private set; }
     public Action MissileDestroyed;
 
     public void Init(Material mat)
@@ -11,16 +12,32 @@ public class Missile : MonoBehaviour
         GetComponent<MeshRenderer>().material = mat;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void Fire(float chargeTime)
+    {
+        //todo: calculate power and launch
+        Launched = true;
+    }
+
+    public void Update()
+    {
+        if (Launched)
+        {
+            //todo: move along the x axis towards the other player's side
+        }
+    }
+
+    #region MonoBehaviour Messages
+    private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
         if (MissileDestroyed != null)
         {
             MissileDestroyed();
         }
     }
+    #endregion
 }

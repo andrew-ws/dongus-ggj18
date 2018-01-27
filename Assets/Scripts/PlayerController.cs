@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour {
             }
             else if (player.GetButtonUp("Spawn Missile"))
             {
-                //todo: swap axis to control missile instead of lanes
+                //todo: swap
+                currentMissile.Fire(missileChargeTime);
+                missileChargeTime = 0;
             }
         }
         #endregion
