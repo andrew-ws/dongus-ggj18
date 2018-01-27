@@ -29,15 +29,17 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 axis = player.GetAxis2D("Horizontal", "Vertical");
+        #region Lanes
+        float laneDir = player.GetAxis("Lane Horizontal");
 
-        if (player.GetButtonDown("Select"))
+        if (player.GetButtonDown("Select Lane"))
         {
 
         }
+        #endregion
 
         #region Missile
-        if (player.GetButtonDown("Missile"))
+        if (player.GetButtonDown("Spawn Missile"))
         {
             //missile is in cooldown
             if (lastMissileTime < lastMissileTime + MISSILE_COOLDOWN || currentMissile != null) return;
@@ -50,14 +52,14 @@ public class PlayerController : MonoBehaviour {
         }
         else if (currentMissile != null)
         {
-            if (player.GetButton("Missile"))
+            if (player.GetButton("Spawn Missile"))
             {
                 //charge missile
                 missileChargeTime += Time.deltaTime;
 
                 //todo: scale missile asset based on time held down and increase power level if applicable
             }
-            else if (player.GetButtonUp("Missile"))
+            else if (player.GetButtonUp("Spawn Missile"))
             {
                 //todo: swap axis to control missile instead of lanes
             }
