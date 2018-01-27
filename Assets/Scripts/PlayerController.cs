@@ -24,26 +24,62 @@ public class PlayerController : MonoBehaviour {
     //consts
     private const float MISSILE_COOLDOWN = 5; //cooldown before you can file another missile
     private const float CHARGE_TIME = 3; //time for missile to be fully charged
+    private const float inputCooldown = .2f; //input cooldown 
+
+    //time elapsed for input cooldown
+    float timeElapsed = 0;
+
+    //lane select
+    float[] zAxis = { -3.5f, 0, 3.5f };
+    int lane;
     #endregion
 
     // Use this for initialization
     void Start () {
 		player = ReInput.players.GetPlayer(id);
-	}
+        lane = 1;
+        transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[lane]) : new Vector3(8.5f, .01f, zAxis[lane]);
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        timeElapsed += Time.deltaTime; //add time to elapsed
+
         #region Lanes
-        float laneDir = player.GetAxis("Lane Horizontal");
-
-        if (player.GetButtonDown("Select Lane"))
+        if (timeElapsed >= inputCooldown)
         {
-
+            timeElapsed = 0;
+            //Move lane depending on player input
+            float laneDir = player.GetAxis("Lane Horizontal");
+            if (player.id == 0)
+            {
+                if (laneDir < 0)
+                {
+                    lane++;
+                }
+                else if (laneDir > 0)
+                {
+                    lane--;
+                }
+            }
+            else
+            {
+                if (laneDir > 0)
+                {
+                    lane++;
+                }
+                else if (laneDir < 0)
+                {
+                    lane--;
+                }
+            }
+            //Set player position in lane 
+            transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[Mathf.Abs(lane % 3)]) : new Vector3(8f, .01f, zAxis[Mathf.Abs(lane % 3)]);
         }
-        #endregion
+            #endregion
 
-        #region Missile
-        if (player.GetButtonDown("Spawn Missile"))
+            #region Missile
+            if (player.GetButtonDown("Spawn Missile"))
         {
             //missile is in cooldown
             if (lastMissileTime < lastMissileTime + MISSILE_COOLDOWN || currentMissile != null) return;
@@ -96,7 +132,7 @@ public class PlayerController : MonoBehaviour {
     private void SpawnMissile(string name)
     {
         currentMissile = Resources.Load<Missile>("Missiles/" + name);
-        currentMissile.transform.position = missileSpawn.position;
+        currentMissile.transform.position = transform.position;
         currentMissile.Init(player, missileMaterial);
     }
 }
