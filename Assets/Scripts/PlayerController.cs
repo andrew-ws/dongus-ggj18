@@ -22,9 +22,9 @@ public class PlayerController : MonoBehaviour {
     private float missileChargeTime;
 
     //consts
-    private const float MISSILE_COOLDOWN = 5; //cooldown before you can file another missile
-    private const float CHARGE_TIME = 3; //time for missile to be fully charged
-    private const float inputCooldown = .2f; //input cooldown 
+    [SerializeField] private const float MISSILE_COOLDOWN = 5; //cooldown before you can file another missile
+    [SerializeField] private const float CHARGE_TIME = 3; //time for missile to be fully charged
+    [SerializeField] private const float inputCooldown = .2f; //input cooldown 
 
     //time elapsed for input cooldown
     float timeElapsed = 0;
