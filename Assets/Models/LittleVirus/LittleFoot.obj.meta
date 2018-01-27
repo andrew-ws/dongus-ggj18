@@ -1,23 +1,33 @@
 fileFormatVersion: 2
 guid: e3999321b858393418c6a2961876cca4
-timeCreated: 1517077531
+timeCreated: 1517080231
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: default
-    100002: //RootNode
-    400000: default
-    400002: //RootNode
-    2300000: default
-    3300000: default
-    4300000: default
+    100000: //RootNode
+    100002: LittleFoot:Mesh
+    100004: default
+    400000: //RootNode
+    400002: LittleFoot:Mesh
+    400004: default
+    2300000: LittleFoot:Mesh
+    2300002: default
+    3300000: LittleFoot:Mesh
+    3300002: default
+    4300000: LittleFoot:Mesh
+    4300002: default
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: defaultMat
-    second: {fileID: 2100000, guid: 8c88622208431ed49b2d1dd71157b2a5, type: 2}
+      name: LittleFoot_MeshMat
+    second: {fileID: 2100000, guid: 936a4a04aef23b44eba469c54ed521dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None
+    second: {fileID: 2100000, guid: 9209c12710651684993bd2a69e69a83e, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
