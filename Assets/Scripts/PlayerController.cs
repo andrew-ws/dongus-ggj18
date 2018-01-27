@@ -14,8 +14,11 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Material missileMaterial;
 
     private Player player;
+
+    //missile stuff
     private Missile currentMissile;
-    private float lastMissileTime; //todo: should be based on time AFTER missile explodes
+    private bool isWorm; //quick hack to know if missile has already been swapped
+    private float lastMissileTime;
     private float missileChargeTime;
 
     //consts
@@ -45,24 +48,32 @@ public class PlayerController : MonoBehaviour {
             //missile is in cooldown
             if (lastMissileTime < lastMissileTime + MISSILE_COOLDOWN || currentMissile != null) return;
 
-            //create new missile
-            currentMissile = Resources.Load<Missile>("Missile");
-            currentMissile.transform.position = missileSpawn.position;
-            currentMissile.Init(missileMaterial);
-            currentMissile.MissileDestroyed += OnMissileDestroyed;
+            SpawnMissile("Ping");
         }
         else if (currentMissile != null)
         {
             if (player.GetButton("Spawn Missile"))
             {
-                //charge missile
-                missileChargeTime += Time.deltaTime;
-
-                //todo: scale missile asset based on time held down and increase power level if applicable
+                if (missileChargeTime >= CHARGE_TIME && !isWorm)
+                {
+                    //swap missiles
+                    Destroy(currentMissile);
+                    SpawnMissile("Worm");
+                }
+                else
+                {
+                    //charge ping into worm
+                    missileChargeTime += Time.deltaTime;
+                }
             }
             else if (player.GetButtonUp("Spawn Missile"))
             {
-                //todo: swap
+                currentMissile.MissileDestroyed += OnMissileDestroyed;
+
+                //swap control maps to missile controls
+                player.controllers.maps.SetMapsEnabled(false, "Default");
+                player.controllers.maps.SetMapsEnabled(true, "Missile");
+
                 currentMissile.Fire(missileChargeTime);
                 missileChargeTime = 0;
             }
@@ -74,6 +85,17 @@ public class PlayerController : MonoBehaviour {
     private void OnMissileDestroyed()
     {
         lastMissileTime = Time.time;
-        //todo: swap controls back to standard lane controls
+
+        //swap control maps back to lane controllers
+        player.controllers.maps.SetMapsEnabled(false, "Default");
+        player.controllers.maps.SetMapsEnabled(true, "Missile");
+    }
+
+    //create new missile
+    private void SpawnMissile(string name)
+    {
+        currentMissile = Resources.Load<Missile>(name);
+        currentMissile.transform.position = missileSpawn.position;
+        currentMissile.Init(player, missileMaterial);
     }
 }
