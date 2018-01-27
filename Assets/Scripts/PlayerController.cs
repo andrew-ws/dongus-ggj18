@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using GG18.Missiles;
 
 public class PlayerController : MonoBehaviour {
 
