@@ -16,7 +16,7 @@ public class LaneSelect : MonoBehaviour {
 	void Start () {
         player = ReInput.players.GetPlayer(id);
         lane = 1;
-        transform.position = (id == 0) ? new Vector3(-10f, .01f, zAxis[lane]) : new Vector3(10f, .01f, zAxis[lane]);
+        transform.position = (player.id == 0) ? new Vector3(-10f, .01f, zAxis[lane]) : new Vector3(10f, .01f, zAxis[lane]);
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class LaneSelect : MonoBehaviour {
         }
 
 
-        transform.position = (id == 0) ? new Vector3(-8.5f, .01f, zAxis[Mathf.Abs(lane)]) : new Vector3(8f, .01f, zAxis[lane]);
+        transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[Mathf.Abs(lane)]) : new Vector3(8f, .01f, zAxis[Mathf.Abs(lane)]);
 
     }
 }
