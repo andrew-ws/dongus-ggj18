@@ -27,7 +27,7 @@ public class TerminalController : MonoBehaviour {
             if (!laneController.isHacked)
             {
                 laneController.HackedBy = PlayerIndex;
-                laneController.Transmitting();
+                laneController.UpdateHacking();
             }
         }
     }

@@ -24,18 +24,19 @@ public class LaneController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
+
         if (!isHacked)
+        {
             //If opponent minion collides with terminal
             if (isHacking)
             {
-                Transmitting();
+                UpdateHacking();
             }
-
+        }
     }
 
     //process of hacking. call by terminal after minion collides
-    public void Transmitting()
+    public void UpdateHacking()
     {
         //if this is called by terminal
         if (!isHacking)
