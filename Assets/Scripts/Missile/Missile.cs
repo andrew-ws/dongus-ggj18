@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GG18.Missiles
 {
-    public class Missile : MonoBehaviour
+    public abstract class Missile : MonoBehaviour
     {
         public bool Launched { get; private set; }
         public Action MissileDestroyed;
