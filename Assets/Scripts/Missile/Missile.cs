@@ -5,6 +5,8 @@ namespace GG18.Missiles
 {
     public abstract class Missile : MonoBehaviour
     {
+		// Set only to 1 and 2 for player 1 and player 2
+		public int PlayerIndex;
         public bool Launched { get; private set; }
         public Action MissileDestroyed;
 

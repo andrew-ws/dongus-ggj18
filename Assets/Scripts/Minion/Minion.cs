@@ -4,10 +4,14 @@ using UnityEngine;
 namespace GG18.Minions {
 	public abstract class Minion : MonoBehaviour {
 
+		// Set only to 1 and 2 for player 1 and player 2
+		public int PlayerIndex;
+
 		void Start () {
 		}
 
-		void Init () {}
+		void Init () {
+		}
 
 		void Fire () {}
 		
