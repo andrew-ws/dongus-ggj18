@@ -4,15 +4,18 @@ using UnityEngine;
 
 namespace GG18.Missiles
 {
+    /// <summary>
+    /// Moveable missile class
+    /// </summary>
     public class Worm : Missile
     {
         public override void Update()
         {
-            base.Update();  
-
-            if (Launched)
+            if (launched)
             {
-                //todo: allow movement between lanes
+                //control missile movement
+                float axis = player.GetAxis("Missile Horizontal");
+                transform.Translate(new Vector3(0, 0, axis * speed) * Time.deltaTime);
             }
         }
     }

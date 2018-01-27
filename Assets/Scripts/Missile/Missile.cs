@@ -1,17 +1,22 @@
 ﻿using System;
 using UnityEngine;
+using Rewired;
 
 namespace GG18.Missiles
 {
     public abstract class Missile : MonoBehaviour
     {
-		// Set only to 1 and 2 for player 1 and player 2
-		public int PlayerIndex;
-        public bool Launched { get; private set; }
+        [SerializeField] protected float speed;
+
+        protected bool launched;
         public Action MissileDestroyed;
 
-        public void Init(Material mat)
+        protected Player player;
+
+        public void Init(Player player, Material mat)
         {
+            this.player = player;
+
             //apply player's missile material to the model
             GetComponent<MeshRenderer>().material = mat;
         }
@@ -19,14 +24,15 @@ namespace GG18.Missiles
         public void Fire(float chargeTime)
         {
             //todo: calculate power and launch
-            Launched = true;
+            launched = true;
         }
 
         public virtual void Update()
         {
-            if (Launched)
+            if (launched)
             {
-                //todo: move along the x axis towards the other player's side
+                //move towards opposite terminal
+                transform.Translate(player.id == 0 ? Vector3.right : Vector3.left * speed * Time.deltaTime);
             }
         }
 
