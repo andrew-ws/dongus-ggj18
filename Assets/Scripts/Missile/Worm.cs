@@ -13,15 +13,9 @@ namespace GG18.Missiles
         {
             if (launched)
             {
+                //control missile movement
                 float axis = player.GetAxis("Missile Horizontal");
-                if (axis > 0)
-                {
-                    transform.Translate(Vector3.forward * speed * Time.deltaTime);
-                }
-                else if(axis < 0) 
-                {
-                    transform.Translate(Vector3.back * speed * Time.deltaTime);
-                }
+                transform.Translate(new Vector3(0, 0, axis * speed) * Time.deltaTime);
             }
         }
     }

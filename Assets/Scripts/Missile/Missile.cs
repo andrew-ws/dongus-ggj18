@@ -6,9 +6,6 @@ namespace GG18.Missiles
 {
     public abstract class Missile : MonoBehaviour
     {
-		// Set only to 1 and 2 for player 1 and player 2
-		public int PlayerIndex;
-
         [SerializeField] protected float speed;
 
         protected bool launched;
@@ -32,7 +29,11 @@ namespace GG18.Missiles
 
         public virtual void Update()
         {
-
+            if (launched)
+            {
+                //move towards opposite terminal
+                transform.Translate(player.id == 0 ? Vector3.right : Vector3.left * speed * Time.deltaTime);
+            }
         }
 
         #region MonoBehaviour Messages

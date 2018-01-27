@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour {
                     //swap missiles
                     Destroy(currentMissile);
                     SpawnMissile("Worm");
+                    isWorm = true;
                 }
                 else
                 {

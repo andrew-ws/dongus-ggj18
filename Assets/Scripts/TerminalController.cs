@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GG18.Minions.Minion;
+using GG18.Minions;
 
 public class TerminalController : MonoBehaviour {
 
