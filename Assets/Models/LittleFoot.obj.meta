@@ -19,7 +19,7 @@ ModelImporter:
       name: defaultMat
     second: {fileID: 2100000, guid: 8c88622208431ed49b2d1dd71157b2a5, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
