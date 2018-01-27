@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
     //create new missile
     private void SpawnMissile(string name)
     {
-        currentMissile = Resources.Load<Missile>(name);
+        currentMissile = Resources.Load<Missile>("Missiles/" + name);
         currentMissile.transform.position = missileSpawn.position;
         currentMissile.Init(player, missileMaterial);
     }
