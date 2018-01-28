@@ -309,6 +309,11 @@ Prefab:
       propertyPath: m_Name
       value: Firewall P2
       objectReference: {fileID: 0}
+    - target: {fileID: 114769162401997462, guid: f24049a24e3efc449b2a6dd84e44e0e9,
+        type: 2}
+      propertyPath: playerId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f24049a24e3efc449b2a6dd84e44e0e9, type: 2}
   m_IsPrefabParent: 0
@@ -1191,6 +1196,11 @@ Prefab:
     - target: {fileID: 1689947504749260, guid: f24049a24e3efc449b2a6dd84e44e0e9, type: 2}
       propertyPath: m_Name
       value: Firewall P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114769162401997462, guid: f24049a24e3efc449b2a6dd84e44e0e9,
+        type: 2}
+      propertyPath: playerId
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f24049a24e3efc449b2a6dd84e44e0e9, type: 2}
