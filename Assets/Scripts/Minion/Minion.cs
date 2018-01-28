@@ -37,7 +37,7 @@ namespace GG18.Minions {
             if (launched && !halt)
             {
                 //move towards opposite terminal
-                transform.Translate(player.id == 0 ? Vector3.right : Vector3.left * speed * Time.deltaTime);
+                transform.Translate((player.id == 0 ? Vector3.right : Vector3.left) * speed * Time.deltaTime);
             }
 			halt = false;
         }
