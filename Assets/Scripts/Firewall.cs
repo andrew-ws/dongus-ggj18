@@ -31,6 +31,10 @@ public class Firewall : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (player.GetButtonDown("Firewall")) {
+			Up();
+		}
+
 		if (top_hold_timer < 0) {
 			if (going_up) {
 				height += move_speed * Time.deltaTime;
