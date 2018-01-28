@@ -153,9 +153,11 @@ public class PlayerController : MonoBehaviour {
             {
                 currentMissile.MissileDestroyed += OnMissileDestroyed;
 
-                //swap control maps to missile controls
-                player.controllers.maps.SetMapsEnabled(false, "Default");
-                player.controllers.maps.SetMapsEnabled(true, "Missile");
+                if (isWorm) {
+                    //swap control maps to missile controls
+                    player.controllers.maps.SetMapsEnabled(false, "Default");
+                    player.controllers.maps.SetMapsEnabled(true, "Missile");
+                }
 
                 currentMissile.Fire();
                 audioManager.MissileSpawnSound();
@@ -173,8 +175,8 @@ public class PlayerController : MonoBehaviour {
         lastMissileTime = Time.time;
 
         //swap control maps back to lane controllers
-        player.controllers.maps.SetMapsEnabled(false, "Default");
-        player.controllers.maps.SetMapsEnabled(true, "Missile");
+        player.controllers.maps.SetMapsEnabled(true, "Default");
+        player.controllers.maps.SetMapsEnabled(false, "Missile");
     }
 
     #region Spawn Methods
