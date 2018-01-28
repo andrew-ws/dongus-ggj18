@@ -1,29 +1,28 @@
-﻿using System;
+﻿using Rewired;
+using System;
 using UnityEngine;
 using Rewired;
 
 namespace GG18.Minions {
-	public abstract class Minion : MonoBehaviour {
+    //at this point we could make a superclass to combine minions and missiles but time.
+	public abstract class Minion : MonoBehaviour
+    {
 
         [SerializeField] protected float speed;
 
         protected bool launched;
-        public Action MissileDestroyed;
 
         public Player player {get; protected set;}
 		private bool halt = false;
 		[SerializeField] protected float hp;
 		[SerializeField] protected float dps;
 
-        public void Init(Player player, Material mat)
+        public void Init(Player player)
         {
             this.player = player;
-
-            //apply player's minion material to the model
-            GetComponent<MeshRenderer>().material = mat;
         }
 
-        public void Fire(float chargeTime)
+        public void Fire()
         {
             //todo: calculate power and launch
             launched = true;
@@ -44,7 +43,7 @@ namespace GG18.Minions {
 			if (dam <= 0) {
 				Destroy(gameObject);
 			}
-		}
+        }
 
         #region MonoBehaviour Messages
         private void OnCollisionEnter(Collision collision)
@@ -63,10 +62,12 @@ namespace GG18.Minions {
 					otherMinion.TakeDamage(dps * Time.deltaTime);
 				}
 			}
+            launched = true;
         }
 
         private void OnDestroy()
         {
+
         }
         #endregion
 	}

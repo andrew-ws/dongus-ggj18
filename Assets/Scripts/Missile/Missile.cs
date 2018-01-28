@@ -6,6 +6,7 @@ namespace GG18.Missiles
 {
     public abstract class Missile : MonoBehaviour
     {
+        [SerializeField] protected float power;
         [SerializeField] protected float speed;
 
         protected bool launched;
@@ -15,21 +16,17 @@ namespace GG18.Missiles
 
         public float dmg;
 
-        public void Init(Player player, Material mat)
+        public void Init(Player player)
         {
             this.player = player;
-
-            //apply player's missile material to the model
-            GetComponent<MeshRenderer>().material = mat;
         }
 
-        public void Fire(float chargeTime)
+        public virtual void Fire()
         {
-            //todo: calculate power and launch
             launched = true;
         }
 
-        public virtual void Update()
+        protected virtual void Update()
         {
             if (launched)
             {
