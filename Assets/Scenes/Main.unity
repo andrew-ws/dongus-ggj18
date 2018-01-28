@@ -1647,6 +1647,7 @@ GameObject:
   - component: {fileID: 2103196120}
   - component: {fileID: 2103196121}
   - component: {fileID: 2103196119}
+  - component: {fileID: 2103196122}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1663,7 +1664,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dca33f1732069ab4da82444dfc94ad2d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1756,5 +1757,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4199fa61eb3b603449593670f9f09abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2103196122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103196118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284b75c661aa88149a4342fec3e423d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
