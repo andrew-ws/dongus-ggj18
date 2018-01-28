@@ -50,13 +50,13 @@ namespace GG18.Minions {
 
 		public void TakeDamage(float dam) {
 			hp -= dam;
-			if (dam <= 0) {
+			if (hp <= 0) {
 				Destroy(gameObject);
 			}
         }
 
         #region MonoBehaviour Messages
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionStay(Collision collision)
         {
 			GameObject otherGO = collision.gameObject;
 			if (otherGO.tag == "minion") {
@@ -65,7 +65,10 @@ namespace GG18.Minions {
 					// lol this is totally gonna fuck up on very long frame delays but w/e
 					float xDiff = otherGO.transform.position.x - transform.position.x;
 					bool amIInBack = (player.id == 0) ? xDiff > 0 : xDiff < 0;
-					if (amIInBack) halt = true;
+					if (amIInBack) {
+                        halt = true;
+                        transform.Translate((player.id != 0 ? Vector3.right : Vector3.left) * speed * Time.deltaTime);
+                    }
 				}
 				else {
 					halt = true;
