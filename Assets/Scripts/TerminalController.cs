@@ -21,7 +21,7 @@ public class TerminalController : MonoBehaviour {
     //And change "HackedBy" to the opponent 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: make sure PlayerIndex is in Minion
+        //TODO: switch to player object
         if(other.tag == "minion" && other.gameObject.GetComponent<Minion>().PlayerIndex != PlayerIndex)
         {
             if (!laneController.isHacked)

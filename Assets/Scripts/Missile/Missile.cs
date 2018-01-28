@@ -11,7 +11,9 @@ namespace GG18.Missiles
         protected bool launched;
         public Action MissileDestroyed;
 
-        protected Player player;
+        public Player player {get; protected set;}
+
+        public float dmg;
 
         public void Init(Player player, Material mat)
         {
@@ -39,8 +41,14 @@ namespace GG18.Missiles
         #region MonoBehaviour Messages
         private void OnCollisionEnter(Collision collision)
         {
-            //todo: check if collision is with opposite team
-            Destroy(gameObject);
+            GameObject otherGO = collision.gameObject;
+            if (otherGO.tag == "minion") {
+                Minions.Minion otherMinion = otherGO.GetComponent<Minions.Minion>();
+                if (otherMinion.player != player) {
+                    otherMinion.TakeDamage(dmg);
+                    Destroy(gameObject);
+                }
+            }
         }
 
         private void OnDestroy()

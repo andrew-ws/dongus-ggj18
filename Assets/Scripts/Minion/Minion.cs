@@ -1,27 +1,68 @@
 ﻿using System;
 using UnityEngine;
+using Rewired;
 
 namespace GG18.Minions {
 	public abstract class Minion : MonoBehaviour {
 
-		// Set only to 1 and 2 for player 1 and player 2
-		public int PlayerIndex;
+        [SerializeField] protected float speed;
 
-		void Start () {
-		}
+        protected bool launched;
+        public Action MissileDestroyed;
 
-		void Init () {
-		}
+        public Player player {get; protected set;}
+		private bool halt = false;
+		[SerializeField] protected float hp;
+		[SerializeField] protected float dps;
 
-		void Fire () {}
-		
-		void Update ()
-		{
+        public void Init(Player player, Material mat)
+        {
+            this.player = player;
+
+            //apply player's minion material to the model
+            GetComponent<MeshRenderer>().material = mat;
+        }
+
+        public void Fire(float chargeTime)
+        {
+            //todo: calculate power and launch
+            launched = true;
+        }
+
+        public virtual void Update()
+        {
+            if (launched && !halt)
+            {
+                //move towards opposite terminal
+                transform.Translate(player.id == 0 ? Vector3.right : Vector3.left * speed * Time.deltaTime);
+            }
+			halt = false;
+        }
+
+		public void TakeDamage(float dam) {
+			hp -= dam;
+			if (dam <= 0) {
+				Destroy(gameObject);
+			}
 		}
 
         #region MonoBehaviour Messages
         private void OnCollisionEnter(Collision collision)
         {
+			GameObject otherGO = collision.gameObject;
+			if (otherGO.tag == "minion") {
+				Minion otherMinion = otherGO.GetComponent<Minion>();
+				if (otherMinion.player == player) {
+					// lol this is totally gonna fuck up on very long frame delays but w/e
+					float xDiff = otherGO.transform.position.x - transform.position.x;
+					bool amIInBack = (player.id == 0) ? xDiff > 0 : xDiff < 0;
+					if (amIInBack) halt = true;
+				}
+				else {
+					halt = true;
+					otherMinion.TakeDamage(dps * Time.deltaTime);
+				}
+			}
         }
 
         private void OnDestroy()

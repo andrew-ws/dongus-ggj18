@@ -11,6 +11,7 @@ namespace GG18.Missiles
     {
         public override void Update()
         {
+            base.Update();
             if (launched)
             {
                 //control missile movement
