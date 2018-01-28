@@ -65,6 +65,7 @@ namespace GG18.Missiles
                 if (otherTerminal.player != player)
                 {
                     audioManager.MissileHitSound();
+                    Destroy(gameObject);
                 }
             }
             else if (otherGO.tag == "missile") //missile collision

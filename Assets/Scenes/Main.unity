@@ -1012,6 +1012,11 @@ Prefab:
       propertyPath: screenLight
       value: 
       objectReference: {fileID: 1188184065}
+    - target: {fileID: 114902349039257634, guid: bbb5968c8011e154a99c8f2904ec9e51,
+        type: 2}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbb5968c8011e154a99c8f2904ec9e51, type: 2}
   m_IsPrefabParent: 0
@@ -1078,6 +1083,11 @@ Prefab:
       propertyPath: screenLight
       value: 
       objectReference: {fileID: 597788183}
+    - target: {fileID: 114902349039257634, guid: bbb5968c8011e154a99c8f2904ec9e51,
+        type: 2}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbb5968c8011e154a99c8f2904ec9e51, type: 2}
   m_IsPrefabParent: 0
@@ -1214,6 +1224,11 @@ Prefab:
       propertyPath: screenLight
       value: 
       objectReference: {fileID: 34596222}
+    - target: {fileID: 114902349039257634, guid: bbb5968c8011e154a99c8f2904ec9e51,
+        type: 2}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: bbb5968c8011e154a99c8f2904ec9e51, type: 2}
