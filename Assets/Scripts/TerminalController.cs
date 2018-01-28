@@ -11,7 +11,7 @@ public class TerminalController : MonoBehaviour {
     public Transform MissileSpawn;
 
     [SerializeField] private int id;
-    private Player player;
+    public Player player;
 
     public GameObject Lane;
     public LaneController laneController;

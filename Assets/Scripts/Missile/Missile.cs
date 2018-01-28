@@ -53,8 +53,8 @@ namespace GG18.Missiles
             }
             else if (otherGO.tag == "terminal")
             {
-                TerminalController otherTermianl = otherGO.GetComponent<TerminalController>();
-                if (otherTermianl.player != player)
+                TerminalController otherTerminal = otherGO.GetComponent<TerminalController>();
+                if (otherTerminal.player != player)
                 {
                     audioManager.MissileHitSound();
                 }
