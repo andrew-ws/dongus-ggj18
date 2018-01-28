@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         #region Lanes
-        if (lastSelectTime + SELECT_COOLDOWN < Time.time)
+        if (lastSelectTime + SELECT_COOLDOWN < Time.time && currentMissile == null)
         {
             float laneDir = player.GetAxis("Lane Horizontal");
             lastSelectTime = Time.time;

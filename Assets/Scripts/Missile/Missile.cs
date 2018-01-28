@@ -34,15 +34,24 @@ namespace GG18.Missiles
         }
 
         #region MonoBehaviour Messages
-        private void OnCollisionEnter(Collision collision)
+        protected virtual void OnCollisionEnter(Collision collision)
         {
             GameObject otherGO = collision.gameObject;
-            if (otherGO.tag == "minion") {
+            if (otherGO.tag == "minion") //minion collision
+            {
                 Minions.Minion otherMinion = otherGO.GetComponent<Minions.Minion>();
                 if (otherMinion.player != player) {
                     otherMinion.TakeDamage(dmg);
                     Destroy(gameObject);
                 }
+            }
+            else if (otherGO.tag == "missile") //missile collision
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("nothing happened");
             }
         }
 
