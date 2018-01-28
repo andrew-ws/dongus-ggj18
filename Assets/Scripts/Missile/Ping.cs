@@ -9,6 +9,17 @@ namespace GG18.Missiles
     /// </summary>
     public class Ping : Missile
     {
+        protected override void OnCollisionEnter(Collision collision)
+        {
+            base.OnCollisionEnter(collision);
 
+            GameObject otherGO = collision.gameObject;
+            if (otherGO.tag == "terminal")
+            {
+                TerminalController terminal = otherGO.GetComponent<TerminalController>();
+                if (terminal)
+                    terminal.Stun();
+            }
+        }
     }
 }

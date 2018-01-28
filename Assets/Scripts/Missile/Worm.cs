@@ -19,5 +19,16 @@ namespace GG18.Missiles
                 transform.Translate(new Vector3(0, 0, axis * speed) * Time.deltaTime);
             }
         }
+
+        protected override void OnCollisionEnter(Collision collision)
+        {
+            base.OnCollisionEnter(collision);
+
+            GameObject otherGO = collision.gameObject;
+            if (otherGO.tag == "terminal")
+            {
+                TerminalController.StunAll(player.id);
+            }
+        }
     }
 }
