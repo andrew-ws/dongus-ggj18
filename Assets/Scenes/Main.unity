@@ -525,7 +525,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &379615706
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,9 +614,6 @@ Transform:
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &658543737
-=======
---- !u!1001 &351109005
->>>>>>> master
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
