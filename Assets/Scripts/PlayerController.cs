@@ -32,8 +32,9 @@ public class PlayerController : MonoBehaviour {
     private const float SELECT_COOLDOWN = 0.2f; //cooldown time for lane selection
     private const float MINION_COOLDOWN = 2; //cooldown before you can spawn another minion
     private const float MINION_CHARGE_MAX = 4; //time for missile to be fully charged
-    private const float MISSILE_COOLDOWN = 5; //cooldown before you can file another missile
-    private const float MISSILE_CHARGE_MAX = 3; //time for missile to be fully charged
+    
+    private const float MISSILE_COOLDOWN = 2; //cooldown before you can file another missile
+    private const float MISSILE_CHARGE_MAX = 1; //time for missile to be fully charged
     
     //lane select
     private int lane;
@@ -94,7 +95,6 @@ public class PlayerController : MonoBehaviour {
                 if (minionChargeTime >= MINION_CHARGE_MAX && !isPayload)
                 {
                     //swap minions
-                    Destroy(currentMinion);
                     SpawnMissile("Payload");
                     isPayload = true;
                 }
@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour {
             else if (player.GetButtonUp("Spawn Minion"))
             {
                 currentMinion.Fire();
+                isPayload = false;
                 minionChargeTime = 0;
             }
         }
@@ -147,6 +148,7 @@ public class PlayerController : MonoBehaviour {
                 player.controllers.maps.SetMapsEnabled(true, "Missile");
 
                 currentMissile.Fire();
+                isWorm = false;
                 missileChargeTime = 0;
             }
         }
@@ -166,6 +168,9 @@ public class PlayerController : MonoBehaviour {
     #region Spawn Methods
     private void SpawnMissile(string name)
     {
+        if (currentMissile != null)
+            Destroy(currentMissile.gameObject);
+
         currentMissile = Instantiate(Resources.Load<Missile>("Missiles/" + name)) as Missile;
         currentMissile.transform.position = transform.position;
         currentMissile.Init(player, missileMaterial);
@@ -173,6 +178,9 @@ public class PlayerController : MonoBehaviour {
 
     private void SpawnMinion(string name)
     {
+        if (currentMinion != null)
+            Destroy(currentMinion.gameObject);
+
         currentMinion = Instantiate(Resources.Load<Minion>("Minions/" + name)) as Minion;
         currentMinion.transform.position = transform.position;
         currentMinion.Init(player);
