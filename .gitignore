@@ -104,3 +104,7 @@ Temporary Items
 Assets/Rewired/
 Assets/Plugins/RainbowAssets/
 Assets/Plugins/RainbowAssets.meta
+Assets/NintendoSDKPlugin/
+SwitchIL2CPPCache/
+SwitchIL2CPPStats/
+Assets/NintendoSDKPlugin.meta

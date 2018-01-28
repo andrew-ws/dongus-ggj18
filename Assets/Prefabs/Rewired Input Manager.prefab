@@ -34,7 +34,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1103371764343428}
-  m_LocalRotation: {x: -0, y: -0.41954485, z: -0, w: 0.90773463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _userData:
-    _allowedNpadStyles: -8
+    _allowedNpadStyles: -7
     _joyConGripStyle: 1
     _adjustIMUsForGripStyle: 1
     _handheldActivationMode: 0
@@ -228,21 +228,45 @@ MonoBehaviour:
       _name: Player0
       _descriptiveName: Player0
       _startPlaying: 1
-      _defaultJoystickMaps: []
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
+      - _enabled: 0
+        _categoryId: 1
+        _layoutId: 0
       _defaultMouseMaps: []
-      _defaultKeyboardMaps: []
+      _defaultKeyboardMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
+      - _enabled: 0
+        _categoryId: 1
+        _layoutId: 0
       _defaultCustomControllerMaps: []
       _startingCustomControllers: []
       _assignMouseOnStart: 1
       _assignKeyboardOnStart: 1
       _excludeFromControllerAutoAssignment: 0
-    - _id: 2
+    - _id: 3
       _name: Player1
       _descriptiveName: Player1
       _startPlaying: 1
-      _defaultJoystickMaps: []
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
+      - _enabled: 0
+        _categoryId: 1
+        _layoutId: 0
       _defaultMouseMaps: []
-      _defaultKeyboardMaps: []
+      _defaultKeyboardMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
+      - _enabled: 0
+        _categoryId: 1
+        _layoutId: 0
       _defaultCustomControllerMaps: []
       _startingCustomControllers: []
       _assignMouseOnStart: 0
@@ -584,7 +608,7 @@ MonoBehaviour:
     mouseMaps: []
     customControllerMaps: []
     customControllers: []
-    playerIdCounter: 3
+    playerIdCounter: 4
     actionIdCounter: 8
     actionCategoryIdCounter: 2
     inputBehaviorIdCounter: 1
