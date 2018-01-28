@@ -6,15 +6,13 @@ namespace GG18.Missiles
 {
     public abstract class Missile : MonoBehaviour
     {
-        [SerializeField] protected float power;
+        [SerializeField] protected float dmg;
         [SerializeField] protected float speed;
 
         protected bool launched;
         public Action MissileDestroyed;
 
         public Player player {get; protected set;}
-
-        public float dmg;
 
         public void Init(Player player)
         {
@@ -31,7 +29,7 @@ namespace GG18.Missiles
             if (launched)
             {
                 //move towards opposite terminal
-                transform.Translate(player.id == 0 ? Vector3.right : Vector3.left * speed * Time.deltaTime);
+                transform.Translate((player.id == 0 ? Vector3.right : Vector3.left) * speed * Time.deltaTime);
             }
         }
 
