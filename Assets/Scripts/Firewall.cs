@@ -63,6 +63,7 @@ public class Firewall : MonoBehaviour {
 		if (cooldown_timer > 0) {
 			return;
 		}
+		cooldown_timer = cooldown_length;
 		going_up = true;
 		going_down = false;
 	}
