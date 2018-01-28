@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour {
     private int lane;
     float lastSelectTime = 0;
     private float[] zAxis = { -3.5f, 0, 3.5f };
+
+    //AudioManager
+    private AudioManager audioManager;
     #endregion
 
     // Use this for initialization
@@ -49,6 +52,9 @@ public class PlayerController : MonoBehaviour {
         //setup lane selection
         lane = 1;
         transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[lane]) : new Vector3(8.5f, .01f, zAxis[lane]);
+
+        GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+        audioManager = gameController.GetComponent<AudioManager>();
     }
 	
 	// Update is called once per frame
@@ -74,6 +80,8 @@ public class PlayerController : MonoBehaviour {
                 else if (laneDir < 0)
                     lane--;
             }
+            if(laneDir!=0)
+                audioManager.SelectLaneSound();
 
             //Set player position in lane 
             transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[Mathf.Abs(lane % 3)]) : new Vector3(8f, .01f, zAxis[Mathf.Abs(lane % 3)]);
@@ -106,6 +114,7 @@ public class PlayerController : MonoBehaviour {
             }
             else if (player.GetButtonUp("Spawn Minion"))
             {
+                audioManager.MinionSpawnSound();
                 currentMinion.Fire();
                 isPayload = false;
                 minionChargeTime = 0;
@@ -139,7 +148,7 @@ public class PlayerController : MonoBehaviour {
                     missileChargeTime += Time.deltaTime;
                 }
             }
-            else if (player.GetButtonUp("Spawn Missile"))
+            else if (player.GetButtonUp("Spawn Missile") && currentMissile.launched == false)
             {
                 currentMissile.MissileDestroyed += OnMissileDestroyed;
 
@@ -148,6 +157,8 @@ public class PlayerController : MonoBehaviour {
                 player.controllers.maps.SetMapsEnabled(true, "Missile");
 
                 currentMissile.Fire();
+                audioManager.MissileSpawnSound();
+
                 isWorm = false;
                 missileChargeTime = 0;
             }
