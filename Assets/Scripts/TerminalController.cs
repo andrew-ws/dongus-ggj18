@@ -16,6 +16,8 @@ public class TerminalController : MonoBehaviour {
     public GameObject Lane;
     public LaneController laneController;
 
+    public Light screenLight;
+
     [SerializeField] private float stunTime = 1;
 
     public bool IsStunned { get; private set; }

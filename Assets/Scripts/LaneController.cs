@@ -14,6 +14,10 @@ public class LaneController : MonoBehaviour {
 
     public Player HackedBy;
 
+    public GameObject TerminalP1;
+    public GameObject TerminalP2;
+
+    private GameObject gameController;
     private AudioManager audioManager; 
 
     // Use this for initialization
@@ -22,7 +26,7 @@ public class LaneController : MonoBehaviour {
         isHacked = false;
         isHacking = false;
         hackTimeElapsed = 0;
-        GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+        gameController = GameObject.FindGameObjectWithTag("GameController");
         audioManager = gameController.GetComponent<AudioManager>();
     }
 
@@ -55,6 +59,16 @@ public class LaneController : MonoBehaviour {
         {
             isHacked = true;
             audioManager.SuccessfulHackSound();
+            if (HackedBy.id == 0)
+            {
+                TerminalP2.GetComponent<TerminalController>().screenLight = TerminalP1.GetComponent<TerminalController>().screenLight;
+                gameController.GetComponent<GameManager>().PlayerOneTally++;
+            }
+            else
+            {
+                TerminalP1.GetComponent<TerminalController>().screenLight = TerminalP2.GetComponent<TerminalController>().screenLight;
+                gameController.GetComponent<GameManager>().PlayerTwoTally++;
+            }
         }
     }
 
