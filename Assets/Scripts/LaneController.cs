@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Rewired;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class LaneController : MonoBehaviour {
     public bool isHacked; //terminal will not set hackedby if already hacked
     bool isHacking;
 
-    public int HackedBy;
+    public Player HackedBy;
 
     // Use this for initialization
     void Start () {
