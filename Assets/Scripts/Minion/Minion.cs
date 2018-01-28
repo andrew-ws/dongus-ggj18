@@ -56,7 +56,7 @@ namespace GG18.Minions {
         }
 
         #region MonoBehaviour Messages
-        private void OnCollisionStay(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
 			GameObject otherGO = collision.gameObject;
 			if (otherGO.tag == "minion") {
@@ -72,7 +72,7 @@ namespace GG18.Minions {
 				}
 				else {
 					halt = true;
-					otherMinion.TakeDamage(dps * Time.deltaTime);
+					otherMinion.TakeDamage(dps);
 				}
 			}
         }
