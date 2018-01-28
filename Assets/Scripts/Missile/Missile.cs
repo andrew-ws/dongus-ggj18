@@ -4,6 +4,7 @@ using Rewired;
 
 namespace GG18.Missiles
 {
+    [RequireComponent(typeof(MeshRenderer))]
     public abstract class Missile : MonoBehaviour
     {
         [SerializeField] protected float dmg;
@@ -17,11 +18,18 @@ namespace GG18.Missiles
         private AudioManager audioManager;
 
 
-        public void Init(Player player)
+        public void Init(Player player, Material mat)
         {
             this.player = player;
             GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
             audioManager = gameController.GetComponent<AudioManager>();
+
+            //hack to get this working
+            //apply material to all
+            foreach (var item in GetComponentsInChildren<MeshRenderer>())
+            {
+                item.material = mat;
+            }
         }
 
         public virtual void Fire()

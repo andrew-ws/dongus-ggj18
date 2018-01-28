@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
                 if (minionChargeTime >= MINION_CHARGE_MAX && !isPayload)
                 {
                     //swap minions
-                    SpawnMissile("Payload");
+                    SpawnMinion("Payload");
                     isPayload = true;
                 }
                 else
@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour {
             {
                 audioManager.MinionSpawnSound();
                 currentMinion.Fire();
+                currentMinion = null; //be free
                 isPayload = false;
                 minionChargeTime = 0;
             }
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour {
 
         currentMissile = Instantiate(Resources.Load<Missile>("Missiles/" + name)) as Missile;
         currentMissile.transform.position = transform.position;
-        currentMissile.Init(player);
+        currentMissile.Init(player, missileMaterial);
     }
 
     private void SpawnMinion(string name)
@@ -194,7 +195,7 @@ public class PlayerController : MonoBehaviour {
 
         currentMinion = Instantiate(Resources.Load<Minion>("Minions/" + name)) as Minion;
         currentMinion.transform.position = transform.position;
-        currentMinion.Init(player);
+        currentMinion.Init(player, missileMaterial);
     }
     #endregion
 }

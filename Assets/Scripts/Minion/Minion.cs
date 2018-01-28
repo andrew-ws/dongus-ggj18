@@ -18,12 +18,18 @@ namespace GG18.Minions {
 
         private AudioManager audioManager;
 
-        public void Init(Player player)
+        public void Init(Player player, Material mat)
         {
             this.player = player;
             GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
             audioManager = gameController.GetComponent<AudioManager>();
             audioManager.MinionSpawnSound();
+
+            //apply material to all
+            foreach (var item in GetComponentsInChildren<MeshRenderer>())
+            {
+                item.material = mat;
+            }
         }
 
         public void Fire()
