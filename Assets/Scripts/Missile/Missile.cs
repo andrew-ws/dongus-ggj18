@@ -9,14 +9,19 @@ namespace GG18.Missiles
         [SerializeField] protected float dmg;
         [SerializeField] protected float speed;
 
-        protected bool launched;
+        public bool launched { get; private set; }
         public Action MissileDestroyed;
 
         public Player player {get; protected set;}
 
+        private AudioManager audioManager;
+
+
         public void Init(Player player)
         {
             this.player = player;
+            GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+            audioManager = gameController.GetComponent<AudioManager>();
         }
 
         public virtual void Fire()
@@ -43,6 +48,15 @@ namespace GG18.Missiles
                 if (otherMinion.player != player) {
                     otherMinion.TakeDamage(dmg);
                     Destroy(gameObject);
+                    audioManager.MissileHitSound();
+                }
+            }
+            else if (otherGO.tag == "terminal")
+            {
+                TerminalController otherTermianl = otherGO.GetComponent<TerminalController>();
+                if (otherTermianl.player != player)
+                {
+                    audioManager.MissileHitSound();
                 }
             }
             else if (otherGO.tag == "missile") //missile collision

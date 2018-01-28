@@ -16,9 +16,14 @@ namespace GG18.Minions {
 		[SerializeField] protected float hp;
 		[SerializeField] protected float dps;
 
+        private AudioManager audioManager;
+
         public void Init(Player player)
         {
             this.player = player;
+            GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+            audioManager = gameController.GetComponent<AudioManager>();
+            audioManager.MinionSpawnSound();
         }
 
         public void Fire()
@@ -65,7 +70,7 @@ namespace GG18.Minions {
 
         private void OnDestroy()
         {
-
+            audioManager.MinionKillSound();
         }
         #endregion
 	}

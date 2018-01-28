@@ -30,9 +30,11 @@ public class AudioManager : MonoBehaviour {
 
         HackingAudioSource = gameObject.AddComponent<AudioSource>();
         HackingAudioSource.clip = Resources.Load<AudioClip>("HackSuccess");
+        HackingAudioSource.loop = false;
         
     }
 
+    //
     public void SuccessfulHackSound()
     {
         //successful hack sound
@@ -42,30 +44,33 @@ public class AudioManager : MonoBehaviour {
     public void MinionSpawnSound()
     {
         //Minion Spawn
-        synth.parameters.SetSettingsString("0,.5,.343,.0537,,.2399,.3,.3721,.001,.3032,,,,,,,,,,,.229,,.652,-.031,,1,,,,,,");
+        synth.parameters.SetSettingsString("0,.169,.343,.0537,,.2399,.3,.3721,.001,.3032,,,,,,,,,,,.229,,.652,-.031,,1,,,,,,");
         synth.CacheSound();
         //call when play
         synth.Play();
     }
 
+    //
     public void MissileSpawnSound()
     {
         //Missile Spawn
-        synth.parameters.SetSettingsString("0,.5,.343,.275,,.2399,.3,.127,,.404,.026,.076,.047,.036,,,,,,,.201,.205,.652,-.217,-.473,1,,,,,,");
+        synth.parameters.SetSettingsString("0,.135,.343,.275,,.2399,.3,.127,,.404,.026,.076,.047,.036,,,,,,,.201,.205,.652,-.217,-.473,1,,,,,,");
         synth.CacheSound();
         //call when play
         synth.Play();
     }
 
+    //
     public void MissileHitSound()
     {
         //Missile hit
-        synth.parameters.SetSettingsString("3,.304,.06,.443,.128,.632,.253,.224,,-.255,,.301,,,,,.0323,,-.0199,,,-.0281,.102,.267,-.193,1,,,,-.0248,,");
+        synth.parameters.SetSettingsString("3,.094,.06,.443,.128,.632,.253,.224,,-.255,,.301,,,,,.0323,,-.0199,,,-.0281,.102,.267,-.193,1,,,,-.0248,,");
         synth.CacheSound();
         //call when play
         synth.Play();
     }
 
+    //
     public void ActiveHackingSound()
     {
         //Hacking
@@ -75,6 +80,7 @@ public class AudioManager : MonoBehaviour {
         synth.Play();
     }
 
+    //
     public void MinionKillSound()
     {
         //Minion kill
@@ -84,12 +90,29 @@ public class AudioManager : MonoBehaviour {
         synth.Play();
     }
     
+    //
     public void SelectLaneSound()
     {
         //Select lane
         synth.parameters.SetSettingsString("0,.263,,.0729,.3909,.21,.3,.5154,,.0055,.0121,.031,,,.0152,,.3846,.6558,,,,.555,,.62,-.973,.9563,,.0476,,,.0281,.0359");
         synth.CacheSound();
+        synth.Play();
+  
+
+    }
+
+    public void FireWallSound()
+    {
+        //Minion Spawn
+        synth.parameters.SetSettingsString("3,.5,.4053,.2404,.0924,.4611,.3198,,,.27,.078,.215,.075,.289,.6384,.199,-.4723,.8543,-.0827,.7978,-.308,-.3278,-.7675,,,.9337,-.0505,.1108,.6153,-.0968,.6159,-.0912");
+        synth.CacheSound();
         //call when play
         synth.Play();
+    }
+
+    //if need to stop
+    public void Stop()
+    {
+        synth.Stop();
     }
 }

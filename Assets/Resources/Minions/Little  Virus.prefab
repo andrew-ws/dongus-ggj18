@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4764214349572466}
   - component: {fileID: 65649818831794248}
   m_Layer: 0
-  m_Name: Little Virus
+  m_Name: Little  Virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

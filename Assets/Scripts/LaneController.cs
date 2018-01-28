@@ -14,12 +14,16 @@ public class LaneController : MonoBehaviour {
 
     public Player HackedBy;
 
+    private AudioManager audioManager; 
+
     // Use this for initialization
     void Start () {
 
         isHacked = false;
         isHacking = false;
         hackTimeElapsed = 0;
+        GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+        audioManager = gameController.GetComponent<AudioManager>();
     }
 
 
@@ -41,12 +45,17 @@ public class LaneController : MonoBehaviour {
     {
         //if this is called by terminal
         if (!isHacking)
+        {
             isHacking = true;
-
+            audioManager.ActiveHackingSound();
+        }
         hackTimeElapsed += Time.deltaTime;
 
         if (hackTimeElapsed >= HackTime)
+        {
             isHacked = true;
+            audioManager.SuccessfulHackSound();
+        }
     }
 
     //call this to stop hacking if minion dies 
@@ -54,5 +63,6 @@ public class LaneController : MonoBehaviour {
     {
         isHacking = false;
         hackTimeElapsed = 0;
+        audioManager.Stop(); //stop active hacking sound
     }
 }
