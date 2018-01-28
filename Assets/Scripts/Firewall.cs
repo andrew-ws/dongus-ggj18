@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Firewall : MonoBehaviour {
 
+	[SerializeField] int playerId;
 	public Player player;
 	float height;
 	public float max_height = 3f;
@@ -22,6 +23,7 @@ public class Firewall : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = ReInput.players.GetPlayer(playerId);
 		initpos = this.transform.position;
 		cooldown_timer = -1f;
 		top_hold_timer = -1f;
