@@ -9,7 +9,7 @@ namespace GG18.Missiles
     /// </summary>
     public class Worm : Missile
     {
-        public override void Update()
+        protected override void Update()
         {
             if (launched)
             {

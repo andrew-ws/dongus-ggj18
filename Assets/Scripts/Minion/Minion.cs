@@ -1,31 +1,33 @@
-﻿using System;
+﻿using Rewired;
+using System;
 using UnityEngine;
 
 namespace GG18.Minions {
-	public abstract class Minion : MonoBehaviour {
 
-		// Set only to 1 and 2 for player 1 and player 2
-		public int PlayerIndex;
+    //at this point we could make a superclass to combine minions and missiles but time.
+	public abstract class Minion : MonoBehaviour
+    {
+        [SerializeField] protected float speed;
 
-		void Start () {
+        protected bool launched;
+
+        // Set only to 1 and 2 for player 1 and player 2
+        public int PlayerIndex; //the minion's player allegiance 
+
+		public void Init(Player player)
+        {
+            PlayerIndex = player.id;
 		}
 
-		void Init () {
-		}
-
-		void Fire () {}
-		
-		void Update ()
-		{
-		}
+		public virtual void Fire()
+        {
+            launched = true;
+        }
 
         #region MonoBehaviour Messages
         private void OnCollisionEnter(Collision collision)
         {
-        }
 
-        private void OnDestroy()
-        {
         }
         #endregion
 	}

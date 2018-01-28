@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using GG18.Missiles;
+using GG18.Minions;
 
 public class PlayerController : MonoBehaviour {
 
@@ -15,82 +16,116 @@ public class PlayerController : MonoBehaviour {
 
     private Player player;
 
+    //minion stuff
+    private Minion currentMinion; //the currently spawning minion
+    private bool isPayload;
+    private float lastMinionTime;
+    private float minionChargeTime;
+
     //missile stuff
     private Missile currentMissile;
-    private bool isWorm; //quick hack to know if missile has already been swapped
+    private bool isWorm; //quick hack to know if minions have been swapped
     private float lastMissileTime;
     private float missileChargeTime;
 
     //consts
-    [SerializeField] private const float MISSILE_COOLDOWN = 5; //cooldown before you can file another missile
-    [SerializeField] private const float CHARGE_TIME = 3; //time for missile to be fully charged
-    [SerializeField] private const float inputCooldown = .2f; //input cooldown 
-
-    //time elapsed for input cooldown
-    float timeElapsed = 0;
-
+    private const float SELECT_COOLDOWN = 0.2f; //cooldown time for lane selection
+    private const float MINION_COOLDOWN = 2; //cooldown before you can spawn another minion
+    private const float MINION_CHARGE_MAX = 4; //time for missile to be fully charged
+    private const float MISSILE_COOLDOWN = 5; //cooldown before you can file another missile
+    private const float MISSILE_CHARGE_MAX = 3; //time for missile to be fully charged
+    
     //lane select
-    float[] zAxis = { -3.5f, 0, 3.5f };
-    int lane;
+    private int lane;
+    float lastSelectTime = 0;
+    private float[] zAxis = { -3.5f, 0, 3.5f };
     #endregion
 
     // Use this for initialization
     void Start () {
 		player = ReInput.players.GetPlayer(id);
+
+        //setup lane selection
         lane = 1;
         transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[lane]) : new Vector3(8.5f, .01f, zAxis[lane]);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        timeElapsed += Time.deltaTime; //add time to elapsed
-
         #region Lanes
-        if (timeElapsed >= inputCooldown)
+        if (lastSelectTime + SELECT_COOLDOWN < Time.time)
         {
-            timeElapsed = 0;
-            //Move lane depending on player input
             float laneDir = player.GetAxis("Lane Horizontal");
-            if (player.id == 0)
+            lastSelectTime = Time.time;
+
+            //Move lane depending on player input
+            if (player.id == 0) //player 1
             {
                 if (laneDir < 0)
-                {
                     lane++;
-                }
                 else if (laneDir > 0)
-                {
                     lane--;
-                }
             }
-            else
+            else //player 2
             {
                 if (laneDir > 0)
-                {
                     lane++;
-                }
                 else if (laneDir < 0)
-                {
                     lane--;
-                }
             }
+
             //Set player position in lane 
             transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[Mathf.Abs(lane % 3)]) : new Vector3(8f, .01f, zAxis[Mathf.Abs(lane % 3)]);
         }
-            #endregion
+        #endregion
 
-            #region Missile
-            if (player.GetButtonDown("Spawn Missile"))
+        #region Minions
+        if (player.GetButtonDown("Spawn Minion"))
         {
-            //missile is in cooldown
-            if (lastMissileTime < lastMissileTime + MISSILE_COOLDOWN || currentMissile != null) return;
-
-            SpawnMissile("Ping");
+            if (lastMinionTime + MINION_COOLDOWN < Time.time || currentMinion == null)
+            {
+                SpawnMinion("Packet");
+            }
         }
-        else if (currentMissile != null)
+        else if (currentMinion != null)
+        {
+            if (player.GetButton("Spawn Minion"))
+            {
+                if (minionChargeTime >= MINION_CHARGE_MAX && !isPayload)
+                {
+                    //swap minions
+                    Destroy(currentMinion);
+                    SpawnMissile("Payload");
+                    isPayload = true;
+                }
+                else
+                {
+                    //charge packet into payload
+                    minionChargeTime += Time.deltaTime;
+                }
+            }
+            else if (player.GetButtonUp("Spawn Minion"))
+            {
+                currentMinion.Fire();
+                minionChargeTime = 0;
+            }
+        }
+        #endregion
+
+        #region Missiles
+        if (player.GetButtonDown("Spawn Missile"))
+        {
+            if (lastMissileTime + MISSILE_COOLDOWN < Time.time || currentMissile == null)
+            {
+                //spawn initial missile
+                SpawnMissile("Ping");
+            }
+        }
+        else if (currentMissile != null) 
         {
             if (player.GetButton("Spawn Missile"))
             {
-                if (missileChargeTime >= CHARGE_TIME && !isWorm)
+                if (missileChargeTime >= MISSILE_CHARGE_MAX && !isWorm)
                 {
                     //swap missiles
                     Destroy(currentMissile);
@@ -111,7 +146,7 @@ public class PlayerController : MonoBehaviour {
                 player.controllers.maps.SetMapsEnabled(false, "Default");
                 player.controllers.maps.SetMapsEnabled(true, "Missile");
 
-                currentMissile.Fire(missileChargeTime);
+                currentMissile.Fire();
                 missileChargeTime = 0;
             }
         }
@@ -128,11 +163,19 @@ public class PlayerController : MonoBehaviour {
         player.controllers.maps.SetMapsEnabled(true, "Missile");
     }
 
-    //create new missile
+    #region Spawn Methods
     private void SpawnMissile(string name)
     {
-        currentMissile = Resources.Load<Missile>("Missiles/" + name);
+        currentMissile = Instantiate(Resources.Load<Missile>("Missiles/" + name)) as Missile;
         currentMissile.transform.position = transform.position;
         currentMissile.Init(player, missileMaterial);
     }
+
+    private void SpawnMinion(string name)
+    {
+        currentMinion = Instantiate(Resources.Load<Minion>("Minions/" + name)) as Minion;
+        currentMinion.transform.position = transform.position;
+        currentMinion.Init(player);
+    }
+    #endregion
 }
