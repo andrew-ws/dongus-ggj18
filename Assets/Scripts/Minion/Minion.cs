@@ -1,7 +1,6 @@
 ﻿using Rewired;
 using System;
 using UnityEngine;
-using Rewired;
 
 namespace GG18.Minions {
     //at this point we could make a superclass to combine minions and missiles but time.
