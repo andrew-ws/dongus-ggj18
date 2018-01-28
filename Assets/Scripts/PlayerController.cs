@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour {
             //Set player position in lane 
             transform.position = (player.id == 0) ? new Vector3(-8.5f, .01f, zAxis[Mathf.Abs(lane % 3)]) : new Vector3(8f, .01f, zAxis[Mathf.Abs(lane % 3)]);
         }
-        #endregion
+            #endregion
 
         #region Minions
         if (player.GetButtonDown("Spawn Minion"))
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour {
     {
         currentMissile = Instantiate(Resources.Load<Missile>("Missiles/" + name)) as Missile;
         currentMissile.transform.position = transform.position;
-        currentMissile.Init(player, missileMaterial);
+        currentMissile.Init(player);
     }
 
     private void SpawnMinion(string name)
