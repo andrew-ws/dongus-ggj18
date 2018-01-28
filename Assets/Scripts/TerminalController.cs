@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Rewired;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GG18.Minions;
@@ -7,7 +8,7 @@ public class TerminalController : MonoBehaviour {
 
     public Transform MissileSpawn;
 
-    public int PlayerIndex; //SET ONLY TO 1 or 2 for player 1 and player 2 
+    public Player player;
 
     public GameObject Lane;
     public LaneController laneController;
@@ -22,11 +23,11 @@ public class TerminalController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         //TODO: switch to player object
-        if(other.tag == "minion" && other.gameObject.GetComponent<Minion>().PlayerIndex != PlayerIndex)
+        if(other.tag == "minion" && other.gameObject.GetComponent<Minion>().player != player)
         {
             if (!laneController.isHacked)
             {
-                laneController.HackedBy = PlayerIndex;
+                laneController.HackedBy = player;
                 laneController.UpdateHacking();
             }
         }
@@ -35,7 +36,7 @@ public class TerminalController : MonoBehaviour {
     //If the minion from opposite team dies, sever connection.
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "minion" && other.gameObject.GetComponent<Minion>().PlayerIndex != PlayerIndex)
+        if(other.tag == "minion" && other.gameObject.GetComponent<Minion>().player != player)
         {
             laneController.SeverConnection();
         }
