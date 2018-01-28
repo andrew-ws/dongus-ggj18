@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc00abb13171754fbb547e9418500ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: -1
   max_height: 3.2
   move_speed: 3
   cooldown_length: 0
-  minion_dps: 0
+  minion_dps: 0.2
   top_hold_time: 1
