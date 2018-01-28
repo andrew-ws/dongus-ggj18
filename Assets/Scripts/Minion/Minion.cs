@@ -61,7 +61,6 @@ namespace GG18.Minions {
 					otherMinion.TakeDamage(dps * Time.deltaTime);
 				}
 			}
-            launched = true;
         }
 
         private void OnDestroy()
