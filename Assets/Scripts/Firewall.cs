@@ -68,9 +68,9 @@ public class Firewall : MonoBehaviour {
 		going_down = false;
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collider)
 	{
-		GameObject otherGO = collision.gameObject;
+		GameObject otherGO = collider.gameObject;
 		if (otherGO.tag == "minion") {
 			Minion otherMinion = otherGO.GetComponent<Minion>();
 			if (otherMinion.player != player) {

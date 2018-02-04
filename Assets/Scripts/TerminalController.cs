@@ -33,8 +33,7 @@ public class TerminalController : MonoBehaviour {
     //And change "HackedBy" to the opponent 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: switch to player object
-        if (other.tag == "minion" && other.gameObject.GetComponent<Minion>().player != player)
+        if (other.gameObject.tag == "minion" && other.gameObject.GetComponent<Minion>().player != player)
         {
             if (!laneController.isHacked)
             {
@@ -47,7 +46,7 @@ public class TerminalController : MonoBehaviour {
     //If the minion from opposite team dies, sever connection.
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "minion" && other.gameObject.GetComponent<Minion>().player != player)
+        if (other.gameObject.tag == "minion" && other.gameObject.GetComponent<Minion>().player != player)
         {
             laneController.SeverConnection();
         }

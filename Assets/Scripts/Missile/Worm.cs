@@ -20,11 +20,11 @@ namespace GG18.Missiles
             }
         }
 
-        protected override void OnCollisionEnter(Collision collision)
+        protected override void OnTriggerEnter(Collider collider)
         {
-            base.OnCollisionEnter(collision);
+            base.OnTriggerEnter(collider);
 
-            GameObject otherGO = collision.gameObject;
+            GameObject otherGO = collider.gameObject;
             if (otherGO.tag == "terminal")
             {
                 TerminalController.StunAll(player.id);

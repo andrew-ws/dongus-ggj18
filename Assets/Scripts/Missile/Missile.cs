@@ -47,9 +47,9 @@ namespace GG18.Missiles
         }
 
         #region MonoBehaviour Messages
-        protected virtual void OnCollisionEnter(Collision collision)
+        protected virtual void OnTriggerEnter(Collider collider)
         {
-            GameObject otherGO = collision.gameObject;
+            GameObject otherGO = collider.gameObject;
             if (otherGO.tag == "minion") //minion collision
             {
                 Minions.Minion otherMinion = otherGO.GetComponent<Minions.Minion>();
