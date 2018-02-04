@@ -11,6 +11,7 @@ namespace GG18.Minions {
 
         protected bool launched = false;
         protected Minion haltFor = null;
+        public bool hacking = false;
 
         public Player player {get; protected set;}
 		[SerializeField] protected float hp;
@@ -40,7 +41,7 @@ namespace GG18.Minions {
 
         public virtual void Update()
         {
-            if (launched && !haltFor)
+            if (launched && !haltFor && !hacking)
             {
                 //move towards opposite terminal
                 transform.Translate((player.id == 0 ? Vector3.right : Vector3.left) * speed * Time.deltaTime);
@@ -55,6 +56,11 @@ namespace GG18.Minions {
         }
 
         #region MonoBehaviour Messages
+        private void OnTriggerEnter(Collider collider)
+        {
+			GameObject otherGO = collider.gameObject;
+        }
+
         private void OnTriggerStay(Collider collider)
         {
 			GameObject otherGO = collider.gameObject;

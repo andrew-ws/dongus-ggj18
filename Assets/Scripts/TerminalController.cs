@@ -37,6 +37,7 @@ public class TerminalController : MonoBehaviour {
         {
             if (!laneController.isHacked)
             {
+                other.gameObject.GetComponent<Minion>().hacking = true;
                 laneController.HackedBy = player;
                 laneController.UpdateHacking();
             }
